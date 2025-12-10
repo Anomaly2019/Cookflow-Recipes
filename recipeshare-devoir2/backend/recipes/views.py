@@ -1,7 +1,8 @@
 from rest_framework import generics
-from .models import Recipe
-from .serializers import RecipeSerializer
+from .models import Recipe, Payment
+from .serializers import RecipeSerializer, PaymentSerializer
 from .permissions import IsOwnerOrReadOnly
+
 
 class RecipeListCreateView(generics.ListCreateAPIView):
     queryset = Recipe.objects.all()
@@ -11,7 +12,13 @@ class RecipeListCreateView(generics.ListCreateAPIView):
         user = self.request.user if self.request.user.is_authenticated else None
         serializer.save(user=user)
 
+
 class RecipeDetailView(generics.RetrieveUpdateDestroyAPIView):
     queryset = Recipe.objects.all()
     serializer_class = RecipeSerializer
     permission_classes = [IsOwnerOrReadOnly]
+
+
+class PaymentListCreateView(generics.ListCreateAPIView):
+    queryset = Payment.objects.all().order_by("-created_at")
+    serializer_class = PaymentSerializer

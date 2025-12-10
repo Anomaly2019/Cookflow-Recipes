@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
 import RecipeList from './RecipeList.jsx';
+import PaymentDemo from './PaymentDemo.jsx';
 
 function App() {
-  const [tab, setTab] = useState('recipes');
+  const [tab, setTab] = useState('recipes'); // recipes | payment | account
 
   return (
     <div className="app-root">
@@ -22,6 +23,12 @@ function App() {
             onClick={() => setTab('recipes')}
           >
             Recettes
+          </button>
+          <button
+            className={`nav-pill ${tab === 'payment' ? 'active' : ''}`}
+            onClick={() => setTab('payment')}
+          >
+            Paiement (démo)
           </button>
           <button
             className={`nav-pill ${tab === 'account' ? 'active' : ''}`}
@@ -101,6 +108,12 @@ function App() {
           </>
         )}
 
+        {tab === 'payment' && (
+          <section className="panel">
+            <PaymentDemo />
+          </section>
+        )}
+
         {tab === 'account' && (
           <section className="panel">
             <div className="panel-header">
@@ -117,9 +130,16 @@ function App() {
               <h3 style={{ marginTop: 0 }}>À propos du projet</h3>
               <p>
                 CookFlow est une application web transactionnelle développée
-                dans le cadre d&apos;un cours de développement d&apos;applications
-                web. L&apos;objectif est de démontrer une architecture complète :
-                backend Django REST + frontend React, avec persistance en base.
+                dans le cadre d&apos;un cours de développement
+                d&apos;applications web. L&apos;objectif est de démontrer une
+                architecture complète : backend Django REST + frontend React,
+                avec persistance en base.
+              </p>
+              <p>
+                La section &laquo; Paiement (démo) &raquo; illustre comment on
+                pourrait collecter les informations nécessaires à une
+                transaction financière avant d&apos;appeler un service comme
+                Stripe.
               </p>
             </div>
           </section>
