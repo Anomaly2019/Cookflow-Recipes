@@ -9,6 +9,7 @@ function RecipeList() {
   const [error, setError] = useState(null);
   const [search, setSearch] = useState('');
   const [onlyPublic, setOnlyPublic] = useState(true);
+  const [toast, setToast] = useState(null);
 
   // Load recipes on mount
   useEffect(() => {
@@ -35,6 +36,29 @@ function RecipeList() {
   // When a recipe is created from the form, add it at the top
   function handleCreated(newRecipe) {
     setRecipes((prev) => [newRecipe, ...prev]);
+    setToast('Recette créée avec succès !');
+    setTimeout(() => setToast(null), 3000);
+  }
+
+  // Delete a recipe
+  async function handleDelete(id) {
+    const ok = window.confirm('Supprimer cette recette ?');
+    if (!ok) return;
+
+    try {
+      const response = await fetch(`${API_URL}${id}/`, {
+        method: 'DELETE',
+        credentials: 'include',
+      });
+
+      if (!response.ok && response.status !== 204) {
+        throw new Error(`Erreur HTTP ${response.status}`);
+      }
+
+      setRecipes((prev) => prev.filter((r) => r.id !== id));
+    } catch (err) {
+      alert('Erreur lors de la suppression : ' + (err.message || 'inconnue'));
+    }
   }
 
   // Filter list by search + public/private
@@ -52,6 +76,8 @@ function RecipeList() {
 
   return (
     <>
+      {toast && <div className="toast-success">{toast}</div>}
+
       {/* Create recipe form */}
       <RecipeForm onCreated={handleCreated} />
 
@@ -122,15 +148,24 @@ function RecipeList() {
               </div>
 
               <footer className="recipe-footer">
-                <span className="price">
-                  {recipe.price && recipe.price !== '0.00'
-                    ? `${recipe.price} $`
-                    : 'Gratuit'}
-                </span>
-                <span className="meta">
-                  #{recipe.id} • Créée le{' '}
-                  {new Date(recipe.created_at).toLocaleString()}
-                </span>
+                <div className="footer-left">
+                  <span className="price">
+                    {recipe.price && recipe.price !== '0.00'
+                      ? `${recipe.price} $`
+                      : 'Gratuit'}
+                  </span>
+                  <span className="meta">
+                    #{recipe.id} • Créée le{' '}
+                    {new Date(recipe.created_at).toLocaleString()}
+                  </span>
+                </div>
+                <button
+                  type="button"
+                  className="btn-ghost-danger"
+                  onClick={() => handleDelete(recipe.id)}
+                >
+                  🗑 Supprimer
+                </button>
               </footer>
             </article>
           ))}

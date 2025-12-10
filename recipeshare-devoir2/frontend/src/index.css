@@ -455,3 +455,124 @@ body {
     grid-template-columns: 1fr;
   }
 }
+.footer-left {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+}
+
+.btn-ghost-danger {
+  padding: 0.25rem 0.7rem;
+  border-radius: 999px;
+  border: 1px solid rgba(248, 113, 113, 0.8);
+  background: transparent;
+  color: #fecaca;
+  font-size: 0.78rem;
+  cursor: pointer;
+  transition: background 0.15s ease-out, color 0.15s ease-out, transform 0.1s;
+}
+
+.btn-ghost-danger:hover {
+  background: rgba(127, 29, 29, 0.6);
+  color: #fee2e2;
+  transform: translateY(-1px);
+}
+
+.toast-success {
+  position: fixed;
+  bottom: 1.2rem;
+  right: 1.5rem;
+  padding: 0.6rem 1.1rem;
+  border-radius: 999px;
+  background: radial-gradient(
+    circle at top left,
+    rgba(34, 197, 94, 0.9),
+    rgba(21, 128, 61, 0.9)
+  );
+  color: #ecfdf5;
+  font-size: 0.86rem;
+  box-shadow: 0 18px 40px rgba(22, 163, 74, 0.7);
+  z-index: 50;
+}
+.hero {
+  max-width: 1100px;
+  margin: 0 auto 1.8rem;
+  text-align: center;
+  padding: 1.6rem 1.4rem 0.4rem;
+}
+
+.hero-title {
+  margin: 0 0 0.4rem;
+  font-size: 2.1rem;
+}
+
+.hero-subtitle {
+  margin: 0 0 1.1rem;
+  font-size: 0.98rem;
+  color: var(--text-muted);
+}
+
+.hero-actions {
+  display: flex;
+  justify-content: center;
+  gap: 0.9rem;
+  margin-bottom: 1.4rem;
+  flex-wrap: wrap;
+}
+
+.hero-btn {
+  padding: 0.55rem 1.3rem;
+  border-radius: 999px;
+  font-size: 0.9rem;
+  cursor: pointer;
+  border: 1px solid transparent;
+  text-decoration: none;
+}
+
+.hero-btn-primary {
+  background: linear-gradient(to right, #22c55e, #16a34a);
+  color: #ecfdf5;
+  box-shadow: 0 18px 40px rgba(22, 163, 74, 0.6);
+}
+
+.hero-btn-outline {
+  background: transparent;
+  color: #a5b4fc;
+  border-color: rgba(129, 140, 248, 0.8);
+}
+
+.hero-btn:hover {
+  transform: translateY(-1px);
+}
+
+.hero-features {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+  gap: 1rem;
+  margin-top: 0.8rem;
+}
+
+.hero-card {
+  background: #020617;
+  border-radius: 14px;
+  border: 1px solid rgba(15, 23, 42, 0.9);
+  padding: 1rem 1.1rem 1.1rem;
+  box-shadow: 0 18px 40px rgba(15, 23, 42, 0.9);
+  text-align: left;
+}
+
+.hero-card-icon {
+  font-size: 1.6rem;
+  margin-bottom: 0.5rem;
+}
+
+.hero-card-title {
+  margin: 0 0 0.3rem;
+  font-size: 1rem;
+}
+
+.hero-card-text {
+  margin: 0;
+  font-size: 0.85rem;
+  color: var(--text-muted);
+}
